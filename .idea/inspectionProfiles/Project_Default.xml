@@ -1,0 +1,62 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyUnboundLocalVariableInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="false" level="WARNING" enabled_by_default="false">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="codigo.draw_tank.pygame" />
+          <option value="codigo.draw_tank.orange" />
+          <option value="codigo.draw_tank.speed_x_tanks" />
+          <option value="codigo.draw_tank.speed_y_tanks" />
+          <option value="codigo.draw_tank.spawn_x_tank_1" />
+          <option value="codigo.draw_tank.spawn_y_tank_1" />
+          <option value="codigo.draw_tank.spawn_x_tank_2" />
+          <option value="codigo.draw_tank.spawn_y_tank_2" />
+          <option value="codigo.moves_and_fire.no_animation" />
+          <option value="codigo.moves_and_fire.victory1" />
+          <option value="codigo.moves_and_fire.victory2" />
+          <option value="codigo.moves_and_fire.list_two_tank" />
+          <option value="codigo.moves_and_fire.counter" />
+          <option value="codigo.moves_and_fire.time_to_recharge" />
+          <option value="codigo.moves_and_fire.time_sound" />
+          <option value="codigo.moves_and_fire.tank_walk" />
+          <option value="codigo.moves_and_fire.pygame" />
+          <option value="codigo.moves_and_fire.screen" />
+          <option value="codigo.moves_and_fire.list_of_obstacles" />
+          <option value="codigo.moves_and_fire.collision_tank_or_ball" />
+          <option value="codigo.moves_and_fire.bounce_ball" />
+          <option value="codigo.moves_and_fire.collision_tank_ball" />
+          <option value="codigo.moves_and_fire.tank_explode" />
+          <option value="codigo.moves_and_fire.shoot_sound" />
+          <option value="codigo.moves_and_fire.speed_x_balls" />
+          <option value="codigo.moves_and_fire.speed_y_balls" />
+          <option value="codigo.moves_and_fire.white" />
+          <option value="codigo.game_keys.event" />
+          <option value="codigo.game_keys.list_two_tank" />
+          <option value="codigo.game_elements.pygame" />
+          <option value="codigo.game_elements.purple" />
+          <option value="codigo.game_elements.black" />
+          <option value="codigo.game_elements.red" />
+          <option value="codigo.game.list_two_tank" />
+          <option value="codigo.game.pygame" />
+          <option value="codigo.game.screen" />
+          <option value="codigo.game.background" />
+          <option value="codigo.game.hud_font" />
+          <option value="codigo.game.purple" />
+          <option value="codigo.game.red" />
+          <option value="codigo.game.hud1_text_rect" />
+          <option value="codigo.game.hud2_text_rect" />
+          <option value="codigo.game.victory1" />
+          <option value="codigo.game.black" />
+          <option value="codigo.game.victory_text1" />
+          <option value="codigo.game.victory_text1_rect" />
+          <option value="codigo.game.victory2" />
+          <option value="codigo.game.victory_text2" />
+          <option value="codigo.game.victory_text2_rect" />
+          <option value="codigo.game.clock" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
