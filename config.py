@@ -20,3 +20,11 @@ border_width = 5
 # clock 
 clk = pygame.time.Clock()
 fps = 60
+
+# player
+speed_player = 15.0
+
+# bullets
+speed_x_balls = 15.0
+speed_y_balls = -15.0
+reload_cooldown = 10
