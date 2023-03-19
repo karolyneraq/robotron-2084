@@ -5,6 +5,7 @@ loop = True
 
 # Colors
 yellow = (255, 255, 0)
+white = (255, 255, 255)
 
 # screen height and width
 screen_width = 1000
@@ -36,3 +37,6 @@ speed_player = 15.0
 speed_x_balls = 15.5
 speed_y_balls = -15.5
 reload_cooldown = 15
+
+# characters
+shape_ppt = 40

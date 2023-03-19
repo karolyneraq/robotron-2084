@@ -27,54 +27,59 @@ class Player(pygame.sprite.Sprite):
         self.sprites_left_w = []
 
         self.sprites_down_s.append(pygame.transform.scale(pygame.image.load(
-            path + "static/front/static_front1.png"), (60, 60)))
+            path + "static/front/static_front1.png"), (shape_ppt, shape_ppt)))
         self.sprites_down_s.append(pygame.transform.scale(pygame.image.load(
-            path + "static/front/static_front2.png"), (60, 60)))
+            path + "static/front/static_front2.png"), (shape_ppt, shape_ppt)))
         self.sprites_down_s.append(pygame.transform.scale(pygame.image.load(
-            path + "static/front/static_front3.png"), (60, 60)))
+            path + "static/front/static_front3.png"), (shape_ppt, shape_ppt)))
         self.sprites_down_s.append(pygame.transform.scale(pygame.image.load(
-            path + "static/front/static_front4.png"), (60, 60)))
+            path + "static/front/static_front4.png"), (shape_ppt, shape_ppt)))
         self.sprites_down_s.append(pygame.transform.scale(pygame.image.load(
-            path + "static/front/static_front5.png"), (60, 60)))
+            path + "static/front/static_front5.png"), (shape_ppt, shape_ppt)))
         self.sprites_down_w.append(pygame.transform.scale(pygame.image.load(
-            path + "walk/front/walking_front1.png"), (60, 60)))
+            path + "walk/front/walking_front1.png"), (shape_ppt, shape_ppt)))
         self.sprites_down_w.append(pygame.transform.scale(pygame.image.load(
-            path + "walk/front/walking_front2.png"), (60, 60)))
+            path + "walk/front/walking_front2.png"), (shape_ppt, shape_ppt)))
         self.sprites_down_w.append(pygame.transform.scale(pygame.image.load(
-            path + "walk/front/walking_front3.png"), (60, 60)))
+            path + "walk/front/walking_front3.png"), (shape_ppt, shape_ppt)))
         self.sprites_down_w.append(pygame.transform.scale(pygame.image.load(
-            path + "walk/front/walking_front4.png"), (60, 60)))
-        self.sprites_up_s.append(pygame.transform.scale(pygame.image.load(path + "static/back/back1.png"), (60, 60)))
-        self.sprites_up_s.append(pygame.transform.scale(pygame.image.load(path + "static/back/back2.png"), (60, 60)))
-        self.sprites_up_s.append(pygame.transform.scale(pygame.image.load(path + "static/back/back3.png"), (60, 60)))
-        self.sprites_up_s.append(pygame.transform.scale(pygame.image.load(path + "static/back/back4.png"), (60, 60)))
-        self.sprites_up_s.append(pygame.transform.scale(pygame.image.load(path + "static/back/back5.png"), (60, 60)))
+            path + "walk/front/walking_front4.png"), (shape_ppt, shape_ppt)))
+        self.sprites_up_s.append(pygame.transform.scale(pygame.image.load(
+            path + "static/back/back1.png"), (shape_ppt, shape_ppt)))
+        self.sprites_up_s.append(pygame.transform.scale(pygame.image.load(
+            path + "static/back/back2.png"), (shape_ppt, shape_ppt)))
+        self.sprites_up_s.append(pygame.transform.scale(
+            pygame.image.load(path + "static/back/back3.png"), (shape_ppt, shape_ppt)))
+        self.sprites_up_s.append(pygame.transform.scale(
+            pygame.image.load(path + "static/back/back4.png"), (shape_ppt, shape_ppt)))
+        self.sprites_up_s.append(pygame.transform.scale(pygame.image.load(
+            path + "static/back/back5.png"), (shape_ppt, shape_ppt)))
         self.sprites_up_w.append(pygame.transform.scale(pygame.image.load(
-            path + "walk/back/walking_back1.png"), (60, 60)))
+            path + "walk/back/walking_back1.png"), (shape_ppt, shape_ppt)))
         self.sprites_up_w.append(pygame.transform.scale(pygame.image.load(
-            path + "walk/back/walking_back2.png"), (60, 60)))
+            path + "walk/back/walking_back2.png"), (shape_ppt, shape_ppt)))
         self.sprites_up_w.append(pygame.transform.scale(pygame.image.load(
-            path + "walk/back/walking_back3.png"), (60, 60)))
+            path + "walk/back/walking_back3.png"), (shape_ppt, shape_ppt)))
         self.sprites_up_w.append(pygame.transform.scale(pygame.image.load(
-            path + "walk/back/walking_back4.png"), (60, 60)))
+            path + "walk/back/walking_back4.png"), (shape_ppt, shape_ppt)))
         self.sprites_right_s.append(pygame.transform.scale(pygame.image.load(
-            path + "static/right/static_right1.png"), (60, 60)))
+            path + "static/right/static_right1.png"), (shape_ppt, shape_ppt)))
         self.sprites_right_s.append(pygame.transform.scale(pygame.image.load(
-            path + "static/right/static_right2.png"), (60, 60)))
+            path + "static/right/static_right2.png"), (shape_ppt, shape_ppt)))
         self.sprites_right_s.append(pygame.transform.scale(pygame.image.load(
-            path + "static/right/static_right3.png"), (60, 60)))
+            path + "static/right/static_right3.png"), (shape_ppt, shape_ppt)))
         self.sprites_right_s.append(pygame.transform.scale(pygame.image.load(
-            path + "static/right/static_right4.png"), (60, 60)))
+            path + "static/right/static_right4.png"), (shape_ppt, shape_ppt)))
         self.sprites_right_s.append(pygame.transform.scale(pygame.image.load(
-            path + "static/right/static_right5.png"), (60, 60)))
+            path + "static/right/static_right5.png"), (shape_ppt, shape_ppt)))
         self.sprites_right_w.append(pygame.transform.scale(pygame.image.load(
-            path + "walk/right/walking_right1.png"), (60, 60)))
+            path + "walk/right/walking_right1.png"), (shape_ppt, shape_ppt)))
         self.sprites_right_w.append(pygame.transform.scale(pygame.image.load(
-            path + "walk/right/walking_right2.png"), (60, 60)))
+            path + "walk/right/walking_right2.png"), (shape_ppt, shape_ppt)))
         self.sprites_right_w.append(pygame.transform.scale(pygame.image.load(
-            path + "walk/right/walking_right3.png"), (60, 60)))
+            path + "walk/right/walking_right3.png"), (shape_ppt, shape_ppt)))
         self.sprites_right_w.append(pygame.transform.scale(pygame.image.load(
-            path + "walk/right/walking_right4.png"), (60, 60)))
+            path + "walk/right/walking_right4.png"), (shape_ppt, shape_ppt)))
         self.sprites_left_s.append(pygame.transform.flip(self.sprites_right_s[0], True, False))
         self.sprites_left_s.append(pygame.transform.flip(self.sprites_right_s[1], True, False))
         self.sprites_left_s.append(pygame.transform.flip(self.sprites_right_s[2], True, False))
@@ -107,10 +112,14 @@ class Player(pygame.sprite.Sprite):
         self.reload_time = 0
         self.bullets = pygame.sprite.Group()
         self.health = 3
+        self.score = 0
 
         self.obstacles = None
         self.zombies = None
         self.hazards = None
+
+    def get_score(self):
+        return self.score
 
     def get_image(self):
         return self.image
