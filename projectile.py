@@ -63,12 +63,12 @@ class Projectile(pygame.sprite.Sprite):
     def collision(self, orient):
         if orient == 0:
             for sprite in self.obstacles:
-                if sprite.rect.colliderect(self.rect) or self.rect.x >= 920:
+                if sprite.rect.colliderect(self.rect) or self.rect.x >= 950 or self.rect.x < 50:
                     self.kill()
 
         if orient == 1:
             for sprite in self.obstacles:
-                if sprite.rect.colliderect(self.rect) or self.rect.y >= 600:
+                if sprite.rect.colliderect(self.rect) or self.rect.y >= 600 or self.rect.y <= 60:
                     self.kill()
 
     def move(self):
@@ -78,9 +78,9 @@ class Projectile(pygame.sprite.Sprite):
         self.current_x += self.speed_x
         self.rect.x = self.current_x
 
-        # self.collision(0)
+        self.collision(0)
 
         self.current_y += self.speed_y
         self.rect.y = self.current_y
 
-        # self.collision(1)
+        self.collision(1)

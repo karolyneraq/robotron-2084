@@ -28,3 +28,11 @@ speed_player = 15.0
 speed_x_balls = 15.0
 speed_y_balls = -15.0
 reload_cooldown = 10
+
+# player
+speed_player = 15.0
+
+# bullets
+speed_x_balls = 15.5
+speed_y_balls = -15.5
+reload_cooldown = 15
