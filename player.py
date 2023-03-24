@@ -247,12 +247,12 @@ class Player(pygame.sprite.Sprite):
                 self.direction.x = 0
                 self.moving_x = False
 
-    def set_movement(self, joy):
-        if joy.get_hat(0)[1] == 1:
+    def set_movement(self):
+        if pygame.joystick.Joystick(0).get_axis(1) < -0.5:
             self.direction.y = -1
             self.sprite_state = 1
             self.moving_y = True
-        elif joy.get_hat(0)[1] == -1:
+        elif pygame.joystick.Joystick(0).get_axis(1) > 0.5:
             self.direction.y = 1
             self.sprite_state = 4
             self.moving_y = True
@@ -260,14 +260,16 @@ class Player(pygame.sprite.Sprite):
             self.direction.y = 0
             self.moving_y = False
 
-        if joy.get_hat(0)[0] == 1:
+        if pygame.joystick.Joystick(0).get_axis(0) > 0.5:
             self.direction.x = 1
             self.sprite_state = 2
             self.moving_x = True
-        elif joy.get_hat(0)[0] == -1:
+
+        elif pygame.joystick.Joystick(0).get_axis(0) < -0.5:
             self.moving_x = True
             self.direction.x = -1
             self.sprite_state = 3
+
         else:
             self.direction.x = 0
             self.moving_x = False
@@ -360,9 +362,9 @@ class Player(pygame.sprite.Sprite):
                     "sprites/bullet.png", direction, self.rect.midbottom[0], self.rect.midbottom[1], self.obstacles)
                 self.bullets.add(bullet)
 
-    def set_fire(self, joy):
-        if joy.get_button(1) == 1 and not self.reloading:
-            self.shoot_sound.play()
+    def set_fire(self):
+        if pygame.joystick.Joystick(0).get_axis(5) > 0.5 and not self.reloading:
+            # if pygame.joystick.Joystick(0).get_button(10) and not self.reloading:
             self.shoot()
             self.reloading = True
             self.reload_time = pygame.time.get_ticks()

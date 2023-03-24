@@ -1,14 +1,16 @@
 import pygame
 from config import *
+import random
 
 
 class Human(pygame.sprite.Sprite):
     def __init__(self, person, spawn):
         super().__init__()
-        path = "Assets/"
+        path = "assets/"
         self.sprites = []
         self.speed_x = 1
-        self.speed_y = 0
+        self.speed_y = 1
+        self.directions = ["up", "down", "left", "right"]
 
         if person == "Mother":
             self.sprites.append(pygame.transform.scale(pygame.image.load(path + "Mother.png"), (shape_ppt, shape_ppt)))

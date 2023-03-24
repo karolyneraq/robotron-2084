@@ -5,9 +5,8 @@ from layouts import Layouts
 from player import Player
 from human import Human
 
-# joysticks = [pygame.joystick.Joystick(x) for x in range(pygame.joystick.get_count())]
-# for joystick in joysticks:
-#    joystick.init()
+pygame.joystick.init()
+Joysticks = [pygame.joystick.Joystick(i) for i in range(pygame.joystick.get_count())]
 
 
 class Game:
@@ -40,9 +39,14 @@ class Game:
             if event.type == pygame.QUIT:
                 pygame.quit()
                 exit()
-            if event.type == pygame.KEYDOWN or event.type == pygame.KEYUP:
-                self.player.set_movement_keys(event)
-                self.player.set_fire_keys(event)
+            if len(Joysticks) == 0:
+                if event.type == pygame.KEYDOWN or event.type == pygame.KEYUP:
+                    self.player.set_movement_keys(event)
+                    self.player.set_fire_keys(event)
+            else:
+                if event.type == pygame.JOYAXISMOTION:
+                    self.player.set_movement()
+                    self.player.set_fire()
 
     # sets the game looping
     def game_loop(self):
