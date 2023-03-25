@@ -35,7 +35,7 @@ class Player(pygame.sprite.Sprite):
 	player_width = 1
 	player_height = 1
 
-	def __init__(self, image, x, y, height, width, *groups: AbstractGroup):
+	def __init__(self, image, x, y, height, width):
 		super().__init__()
 		self.x = self.origin_x = x
 		self.y = self.origin_y = y
@@ -85,7 +85,7 @@ class Enemy(pygame.sprite.Sprite):
 			self.x -= self.enemy_vel
 
 	def move_y(self, above=True):
-		if Above:
+		if above:
 			self.y += self.enemy_vel
 		else:
 			self.y -= self.enemy_vel
@@ -134,9 +134,9 @@ def player_movement(keys, player, bullet):
 def enemy_movement(enemy_group, player):
 	for curr_enemy in enemy_group:
 		if player.y >= curr_enemy.y:
-			curr_enemy.move_y(Above=True)
+			curr_enemy.move_y(above=True)
 		if player.y <= curr_enemy.y:
-			curr_enemy.move_y(Above=False)
+			curr_enemy.move_y(above=False)
 		if player.x >= curr_enemy.x:
 			curr_enemy.move_x(right=True)
 		if player.x <= curr_enemy.x:
