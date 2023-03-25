@@ -20,3 +20,6 @@ border_width = 5
 # clock 
 clk = pygame.time.Clock()
 fps = 60
+
+# sheets 
+player_sheet = pygame.image.load("sprites/playersheet.png")

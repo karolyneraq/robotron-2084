@@ -1,4 +1,6 @@
+import random
 from config import *
+from player import Player
 from layouts import Layouts
 
 # joysticks = [pygame.joystick.Joystick(x) for x in range(pygame.joystick.get_count())]
@@ -11,6 +13,8 @@ class Game:
         self.screen = screen
         self.loop = loop
         self.walls = Layouts().get_group()
+        self.player_sprites = pygame.sprite.Group()
+        self.player_sprites.add(Player(player_sheet, (500, 300), random.randrange(0, 12, 4)))
 
     # Check if an event happens
     @staticmethod
@@ -35,4 +39,5 @@ class Game:
     # draw elements
     def draw_sprites(self):
         self.walls.draw(self.screen)
-        
+        self.player_sprites.draw(self.screen)
+        self.player_sprites.update()        
