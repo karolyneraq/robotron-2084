@@ -57,4 +57,3 @@ class Human(pygame.sprite.Sprite):
             self.speed_y *= -1
         elif self.rect.y <= 0 and self.speed_y < 0:
             self.speed_y *= -1
-
