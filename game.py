@@ -1,92 +1,58 @@
-import pygame
-
+from random import randint
 from config import *
-from layouts import Layouts
 from player import Player
-from human import Human
+from layouts import Layouts
+from enemy import Enemy
 
-pygame.joystick.init()
-Joysticks = [pygame.joystick.Joystick(i) for i in range(pygame.joystick.get_count())]
+# joysticks = [pygame.joystick.Joystick(x) for x in range(pygame.joystick.get_count())]
+# for joystick in joysticks:
+#    joystick.init()
 
 
-class Game:
+class Game(pygame.sprite.Sprite):
     def __init__(self, screen):
         self.screen = screen
         self.loop = loop
         self.walls = Layouts().get_group()
+        self.player_sprites = pygame.sprite.Group()
+        self.player = Player((500, 300), player)
+        self.player_sprites.add(self.player)
+        self.background = game_surface
+        self.enemy_group = pygame.sprite.Group()
 
-        # Player
-        self.player = Player()
-        self.player_group = pygame.sprite.Group()
-        self.player_group.add(self.player)
-
-        # Humans
-        self.mother = Human("Mother", (500, 200))
-        self.father = Human("Father", (100, 100))
-        self.baby = Human("Baby", (400, 500))
-
-        self.human_group = pygame.sprite.Group()
-        self.human_group.add(self.mother)
-        self.human_group.add(self.father)
-        self.human_group.add(self.baby)
-
-        self.wave = 0
-        self.font = pygame.font.Font('robotron-2084.ttf', 25)
+        for cnt in range(randint(1, 10)):
+            enemy = Enemy(randint(0, screen_width), randint(50, screen_height))
+            self.enemy_group.add(enemy)
 
     # Check if an event happens
     def check_events(self):
         for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    self.player.shoot()
             if event.type == pygame.QUIT:
                 pygame.quit()
                 exit()
-            if len(Joysticks) == 0:
-                if event.type == pygame.KEYDOWN or event.type == pygame.KEYUP:
-                    self.player.set_movement_keys(event)
-                    self.player.set_fire_keys(event)
-            else:
-                if event.type == pygame.JOYAXISMOTION:
-                    self.player.set_movement()
-                    self.player.set_fire()
+
+    def bullet_collision(self, bullet):
+        for wall in self.walls:
+            if pygame.sprite.collide_mask(bullet, wall):
+                bullet.kill()
 
     # sets the game looping
     def game_loop(self):
 
         while self.loop:
-            self.screen.blit(game_surface, (proportion / 2, proportion / 2))
-            self.draw_sprites()
+            self.screen.blit(game_surface, (0, 0))
             self.check_events()
+            self.draw_sprites()
 
-            # Player
-            self.player.set_obstacles(self.walls)
-            self.player_group.update()
+            for bullet in self.player.bullet_list:
+                self.bullet_collision(bullet)
 
-            for bullet in self.player.get_bullets():
-                bullet.move()
+            Enemy.enemy_movement(self.enemy_group, self.player)
 
-            for bullet in self.player.get_bullets():
-                bullet.move()
-            self.player_group.draw(self.screen)
-            self.player.get_bullets().draw(self.screen)
-            self.player_group.update()
-
-            # Humans
-            self.mother.set_obstacles(self.walls)
-            self.father.set_obstacles(self.walls)
-            self.baby.set_obstacles(self.walls)
-            self.human_group.update()
-
-            # Score Display
-            score = f'{self.player.get_score():04d}'
-            score_txt = self.font.render(score, True, white)
-            self.screen.blit(score_txt, (200, 10))
-
-            # Wave Display
-            wave = f'{self.wave}'
-            wave_number = self.font.render(wave, True, white)
-            self.screen.blit(wave_number, (450, 610))
-
-            wave_txt = self.font.render("WAVE", True, white)
-            self.screen.blit(wave_txt, (510, 610))
+            self.player.move()
 
             pygame.display.update()
             clk.tick(fps)
@@ -94,6 +60,9 @@ class Game:
     # draw elements
     def draw_sprites(self):
         self.walls.draw(self.screen)
-        self.player_group.draw(self.screen)
-        self.player.get_bullets().draw(self.screen)
-        self.human_group.draw(self.screen)
+        self.player_sprites.draw(self.screen)
+        self.player.bullet_group.draw(self.screen)
+        self.player.bullet_group.update()
+        for curr_enemy in self.enemy_group:
+            curr_enemy.draw(self.screen)
+        pygame.display.update()

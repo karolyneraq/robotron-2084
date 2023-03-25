@@ -5,16 +5,15 @@ loop = True
 
 # Colors
 yellow = (255, 255, 0)
-white = (255, 255, 255)
 
 # screen height and width
 screen_width = 1000
 screen_height = 650
-
+    
 proportion = 100
 
 # sets the game surface
-game_surface = pygame.Surface((screen_width - proportion, screen_height - proportion))
+game_surface = pygame.Surface(([1000, 650]))
 
 border_width = 5
 
@@ -22,21 +21,12 @@ border_width = 5
 clk = pygame.time.Clock()
 fps = 60
 
-# player
-speed_player = 15.0
+# player/enemies/bullet speed
+player_speed = 7
+bullet_speed = 11
 
-# bullets
-speed_x_balls = 15.0
-speed_y_balls = -15.0
-reload_cooldown = 10
+# sheets 
+player_sheet = pygame.image.load("sprites/playersheet.png")
+player = pygame.transform.scale(pygame.image.load("sprites/player.png"), (100, 80))
+bullet = pygame.image.load("sprites/testeball.png")
 
-# player
-speed_player = 5
-
-# bullets
-speed_x_balls = 15.5
-speed_y_balls = -15.5
-reload_cooldown = 1
-
-# characters proportion
-shape_ppt = 40
