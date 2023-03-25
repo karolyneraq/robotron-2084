@@ -13,7 +13,7 @@ screen_height = 650
 proportion = 100
 
 # sets the game surface
-game_surface = pygame.Surface((screen_width - proportion, screen_height - proportion))
+game_surface = pygame.Surface(([1000, 650]))
 
 border_width = 5
 
@@ -21,5 +21,12 @@ border_width = 5
 clk = pygame.time.Clock()
 fps = 60
 
+# player/enemies/bullet speed
+player_speed = 7
+bullet_speed = 11
+
 # sheets 
 player_sheet = pygame.image.load("sprites/playersheet.png")
+player = pygame.image.load("sprites/player.png")
+bullet = pygame.image.load("sprites/testeball.png")
+
