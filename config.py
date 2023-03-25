@@ -1,6 +1,6 @@
 import pygame
 
-WIDTH, HEIGHT = 800, 800
+WIDTH, HEIGHT = 800, 600
 win = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Robotron")
 FPS = 60

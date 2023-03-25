@@ -8,7 +8,7 @@ pygame.init()
 
 def draw(win, player, enemy_group, bullet_group):
     win.fill(BLACK)
-    pygame.draw.rect(win, (255, 255, 0), (0, 50, WIDTH, HEIGHT - 50), 5)
+    pygame.draw.rect(win, (255, 0, 0), (0, 50, WIDTH, HEIGHT - 50), 5)
     bullet_group.draw(win)
     player.draw(win)
     for curr_enemy in enemy_group:

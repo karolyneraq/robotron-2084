@@ -3,9 +3,6 @@ from bullet import Bullet
 
 
 class Player(pygame.sprite.Sprite):
-    player_vel = 3
-    player_width = 1
-    player_height = 1
 
     def __init__(self, image, x, y, height, width):
         super().__init__()
@@ -17,6 +14,9 @@ class Player(pygame.sprite.Sprite):
         self.image = player_img_front
         self.rect = self.image.get_rect()
         self.rect.center = [x, y]
+        self.player_vel = 7
+        self.player_width = 1
+        self.player_height = 1
 
     def move_x(self, right=True):
         if right:
@@ -38,7 +38,8 @@ class Player(pygame.sprite.Sprite):
     def create_bullet(self):
         return Bullet(self.x, self.y)
 
-    def player_rotation(self, keys, player, win, x, y):
+    @staticmethod
+    def player_rotation(keys, player, win, x, y):
         if keys[pygame.K_w]:
             win.blit(player_img_back, (x, y))
         if keys[pygame.K_s]:
@@ -49,7 +50,8 @@ class Player(pygame.sprite.Sprite):
             win.blit(player_img_left, (x, y))
         pygame.display.update()
 
-    def player_movement(self, keys, player, bullet):
+    @staticmethod
+    def player_movement(keys, player, bullet):
         if keys[pygame.K_w] and player.y - player.player_vel - 1 > 53:
             player.move_y(up=True)
         if keys[pygame.K_s] and player.y + player.player_vel + 32 + 1 <= HEIGHT:
