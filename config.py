@@ -44,3 +44,8 @@ bullet = pygame.image.load("sprites/testeball.png")
 
 # font
 score_font = pygame.font.Font("font/robotron-2084.ttf", 30)
+gam_over_font = pygame.font.Font("font/robotron-2084.ttf", 60)
+sbb_font = pygame.font.Font("font/robotron-2084.ttf", 20)
+
+# bool 
+generate = True

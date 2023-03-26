@@ -17,21 +17,33 @@ class Game(pygame.sprite.Sprite):
         self.loop = loop
         self.walls = Layouts().get_group()
         self.player_sprites = pygame.sprite.Group()
-        self.enemy_group = pygame.sprite.Group()
-        self.human_group = pygame.sprite.Group()
         self.player = Player((500, 300), player)
         self.player_sprites.add(self.player)
+        self.enemy_group = pygame.sprite.Group()
+        self.human_group = pygame.sprite.Group()
+        self.generate = generate
         self.background = game_surface
+        self.humans_number = 3
+        self.add_groups()
+        self.gameplay_loop = True
+        self.score_text_rect = (150, 15)
+        self.game_over_text_rect = (screen_width/2 - 170, screen_height/2 - 70)
+        self.subtitle_rect = (screen_width/2 - 270, screen_height/2 + 40)
+        self.wave_number_rect = (415, 615)
+
+    def add_groups(self):
+        # generate enemy groups
         for i in range(randint(1, 10)):
             enemy = Enemy(randint(0, screen_width), randint(50, screen_height), self.player)
             self.enemy_group.add(enemy)
-
+        # generate human groups
         for h in range(3):
             human = Humans(randint(75, 865), randint(80, screen_height - 80))
             self.human_group.add(human)
 
-        self.score_text_rect = (150, 15)
-        self.wave_number_rect = (415, 615)
+    def add_player(self):
+        self.player_sprites.add(self.player)
+        
 
     # Check if an event happens
     def check_events(self):
@@ -42,6 +54,22 @@ class Game(pygame.sprite.Sprite):
             if pygame.key.get_pressed()[pygame.K_SPACE]:
                 self.player.shoot()
 
+    def check_events_menu(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    self.gameplay_loop = True
+                if event.key == pygame.K_ESCAPE:
+                    pygame.quit()
+                    exit()
+
+                self.add_groups()
+                self.add_player()
+        
+
     # sets the collision between bullet and wall groups
     def bullet_collision(self):
         for wall in self.walls:
@@ -50,6 +78,12 @@ class Game(pygame.sprite.Sprite):
                     bullet.kill()
         # clear the ball list
         self.player.bullet_list.clear()
+
+    def clear_all(self):
+        self.player_sprites.empty()
+        self.enemy_group.empty()
+        self.human_group.empty()
+        self.humans_number = 3
 
     # sets the collision between player/wall/enemies groups
     def player_collision(self):
@@ -70,8 +104,17 @@ class Game(pygame.sprite.Sprite):
             for player in self.player_sprites:
                 if pygame.sprite.collide_mask(enemy, player):
                     player.kill()
-                    self.player.bullet_group.empty()
-                    self.player.bullet_list.clear()
+                    self.gameplay_loop = False
+                    self.clear_all()
+                    
+
+    def next_level(self):
+        if self.humans_number == 0:
+            self.player.wave_number += 1
+            self.enemy_group.empty()
+            self.human_group.empty()
+            self.add_groups()
+            self.humans_number = 3
 
     def enemy_damage(self):
         for enemy in self.enemy_group:
@@ -87,12 +130,14 @@ class Game(pygame.sprite.Sprite):
                 if pygame.sprite.collide_mask(player, human):
                     human.kill()
                     self.player.score += 2000
+                    self.humans_number -= 1
 
     def kill_humans(self):
         for human in self.human_group:
             for enemy in self.enemy_group:
                 if pygame.sprite.collide_mask(enemy, human):
                     human.kill()
+                    self.humans_number -= 1
 
     def draw_borders(self):
         colour = choice(colour_list)
@@ -105,18 +150,29 @@ class Game(pygame.sprite.Sprite):
     def game_loop(self):
         while self.loop:
             self.screen.blit(game_surface, (0, 0))
-            self.check_events()
-            self.draw_sprites()
-            self.player.move()
-            self.player_collision()
-            self.player_damage()
-            self.bullet_collision()
-            self.enemy_damage()
-            self.collect_humans()
-            self.kill_humans()
-            self.check_points()
-            self.human_collide()
-            self.draw_borders()
+            if self.gameplay_loop:
+                self.check_events()
+                self.draw_sprites()
+                self.player.move()
+                self.player_collision()
+                self.player_damage()
+                self.bullet_collision()
+                self.enemy_damage()
+                self.collect_humans()
+                self.kill_humans()
+                self.check_points()
+                self.human_collide()
+                self.draw_borders()
+                self.next_level()
+            else:
+                c = choice(colour_list)
+                game_over = gam_over_font.render("You Died", True, c)
+                game_over_sb = sbb_font.render("Press SPACE to play again or ESC to exit", True, c)
+                self.screen.blit(game_over, self.game_over_text_rect)
+                self.screen.blit(game_over_sb, self.subtitle_rect)
+
+
+                self.check_events_menu()
 
             pygame.display.update()
             clk.tick(fps)
@@ -124,20 +180,21 @@ class Game(pygame.sprite.Sprite):
     # draw elements
     def draw_sprites(self):
         self.walls.update()
-        self.player.update()
         self.player_sprites.draw(self.screen)
-        self.player.bullet_group.draw(self.screen)
-        self.player.bullet_group.update()
         self.enemy_group.draw(self.screen)
-        self.enemy_group.update()
         self.human_group.draw(self.screen)
+        self.player.bullet_group.draw(self.screen)
+        self.enemy_group.update()
         self.human_group.update()
+        self.player.update()
+        self.player.bullet_group.update()
 
     def check_points(self):
         score_text = score_font.render(str(self.player.score), True, choice(colour_list))
         wave_text = score_font.render(str(self.player.wave_number) + " WAVE", True, choice(colour_list))
         self.screen.blit(score_text, self.score_text_rect)
         self.screen.blit(wave_text, self.wave_number_rect)
+
 
     def human_collide(self):
         for wall in self.walls:
