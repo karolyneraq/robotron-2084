@@ -130,6 +130,7 @@ class Game(pygame.sprite.Sprite):
             self.kill_humans()
             self.check_points()
             self.human_collide()
+            self.draw_squares(screen, screen_width, screen_height, num_squares, square_size)
             self.draw_borders()
 
             pygame.display.update()
