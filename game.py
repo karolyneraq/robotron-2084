@@ -21,7 +21,7 @@ class Game(pygame.sprite.Sprite):
         self.enemy_group = pygame.sprite.Group()
 
         for cnt in range(randint(1, 10)):
-            enemy = Enemy(randint(0, screen_width), randint(50, screen_height))
+            enemy = Enemy(randint(0, screen_width), randint(50, screen_height), self.player)
             self.enemy_group.add(enemy)
 
     # Check if an event happens
@@ -50,7 +50,7 @@ class Game(pygame.sprite.Sprite):
             for bullet in self.player.bullet_list:
                 self.bullet_collision(bullet)
 
-            Enemy.enemy_movement(self.enemy_group, self.player)
+            self.enemy_group.update()
 
             self.player.move()
 
@@ -63,6 +63,6 @@ class Game(pygame.sprite.Sprite):
         self.player_sprites.draw(self.screen)
         self.player.bullet_group.draw(self.screen)
         self.player.bullet_group.update()
-        for curr_enemy in self.enemy_group:
-            curr_enemy.draw(self.screen)
+        self.enemy_group.draw(self.screen)
+
         pygame.display.update()
