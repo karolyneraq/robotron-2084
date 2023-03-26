@@ -50,7 +50,7 @@ class Player(pygame.sprite.Sprite):
     def shoot(self):
         if self.shoot_cooldown == 0:
             self.shoot_cooldown = shoot_cooldown
-            bullet = Bullet(self.rect.centerx + (0.1 * self.rect.size[0]*self.direction_player),
+            bullet = Bullet(self.rect.centerx + (0.15 * self.rect.size[0]*self.direction_player),
                             self.rect.centery, [self.ang_x, self.ang_y])
             self.bullet_group.add(bullet)
             self.bullet_list.append(bullet)

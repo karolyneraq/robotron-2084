@@ -1,5 +1,7 @@
 import pygame
 
+pygame.font.init()
+
 # looping
 loop = True
 
@@ -25,7 +27,11 @@ fps = 60
 player_speed = 7
 bullet_speed = 11
 shoot_cooldown = 7
+
 # sheets 
 player_sheet = pygame.image.load("sprites/playersheet.png")
 player = pygame.image.load("sprites/player.png")
 bullet = pygame.image.load("sprites/testeball.png")
+
+# font
+font = pygame.font.Font("font/robotron-2084.ttf", 30)
