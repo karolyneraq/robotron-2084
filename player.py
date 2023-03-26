@@ -55,6 +55,8 @@ class Player(pygame.sprite.Sprite):
                             self.rect.centery, [self.ang_x, self.ang_y])
             self.bullet_group.add(bullet)
             self.bullet_list.append(bullet)
+            mixer.music.load('sounds/tiro.mp3')
+            mixer.music.play()
 
     def update(self):
         if self.shoot_cooldown > 0:

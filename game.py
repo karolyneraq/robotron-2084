@@ -78,7 +78,9 @@ class Game(pygame.sprite.Sprite):
             for bullet in self.player.bullet_group:
                 if pygame.sprite.collide_mask(enemy, bullet):
                     bullet.kill()
+                    mixer.music.load('sounds/death.mp3')
                     enemy.kill()
+                    mixer.music.play()
                     self.player.score += 100
     
     def collect_humans(self):
