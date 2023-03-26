@@ -29,10 +29,26 @@ class Game(pygame.sprite.Sprite):
                 pygame.quit()
                 exit()
 
-    def bullet_collision(self, bullet):
+    def bullet_collision(self):
+        for bullet in self.player.bullet_list:
+            for wall in self.walls:
+                if wall.collide_mask(bullet.rect):
+                    bullet.kill()
+        # clear the ball list
+        self.player.bullet_list.clear()
+
+    def player_collision(self):
         for wall in self.walls:
-            if pygame.sprite.collide_mask(bullet, wall):
-                bullet.kill()
+            if pygame.sprite.collide_mask(self.player, wall):
+                if abs(self.player.rect.top - wall.rect.bottom) < 60:
+                    self.player.rect.y += player_speed
+                elif abs(wall.rect.top - self.player.rect.bottom) < 40:
+                    self.player.rect.y -= player_speed
+                elif abs(wall.rect.left - self.player.rect.right) < 74:
+                    self.player.rect.x -= player_speed
+                elif abs(self.player.rect.left - wall.rect.right) < 74:
+                    self.player.rect.x += player_speed
+
 
     # sets the game looping
     def game_loop(self):
@@ -41,11 +57,8 @@ class Game(pygame.sprite.Sprite):
             self.screen.blit(game_surface, (0, 0))
             self.check_events()
             self.draw_sprites()
-
-            for bullet in self.player.bullet_list:
-                self.bullet_collision(bullet)
-
             self.player.move()
+            self.player_collision()
 
             pygame.display.update()
             clk.tick(fps)
