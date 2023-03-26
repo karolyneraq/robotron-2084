@@ -1,14 +1,25 @@
 import pygame
 
+pygame.font.init()
+
 # looping
 loop = True
 
 # Colors
-yellow = (255, 255, 0)
+RED = (134, 28, 9)
+YELLOW = (212, 169, 65)
+WHITE = (255, 255, 255)
+GREEN = (0, 127, 33)
+BLUE = (0, 97, 148)
+DARKER_GREEN = (31, 61, 12)
+DARKER_BLUE = (11, 11, 69)
+
+colour_list = [RED, YELLOW, WHITE, GREEN, BLUE, DARKER_BLUE, DARKER_GREEN]
 
 # screen height and width
 screen_width = 1000
 screen_height = 650
+screen = pygame.display.set_mode((screen_width, screen_height))
     
 proportion = 100
 
@@ -24,9 +35,12 @@ fps = 60
 # player/enemies/bullet speed
 player_speed = 7
 bullet_speed = 11
+shoot_cooldown = 7
 
 # sheets 
 player_sheet = pygame.image.load("sprites/playersheet.png")
-player = pygame.transform.scale(pygame.image.load("sprites/player.png"), (100, 80))
+player = pygame.image.load("sprites/player.png")
 bullet = pygame.image.load("sprites/testeball.png")
 
+# font
+score_font = pygame.font.Font("font/robotron-2084.ttf", 30)
