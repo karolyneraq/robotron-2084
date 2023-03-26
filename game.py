@@ -15,14 +15,13 @@ class Game(pygame.sprite.Sprite):
         self.loop = loop
         self.walls = Layouts().get_group()
         self.player_sprites = pygame.sprite.Group()
+        self.enemy_group = pygame.sprite.Group()
         self.player = Player((500, 300), player)
         self.player_sprites.add(self.player)
         self.background = game_surface
-        self.enemy_group = pygame.sprite.Group()
         for i in range(randint(1, 10)):
-            enemy = Enemy(randint(0, screen_width), randint(50, screen_height))
+            enemy = Enemy(randint(0, screen_width), randint(50, screen_height), self.player)
             self.enemy_group.add(enemy)
-
 
     # Check if an event happens
     def check_events(self):
@@ -64,9 +63,6 @@ class Game(pygame.sprite.Sprite):
             self.player.move()
             self.player_collision()
             self.bullet_collision()
-            for curr_enemy in self.enemy_group:
-                curr_enemy.draw(self.screen)
-            Enemy.enemy_movement(self.enemy_group, self.player)
             pygame.display.update()
             clk.tick(fps)
 
@@ -77,5 +73,5 @@ class Game(pygame.sprite.Sprite):
         self.player_sprites.draw(self.screen)
         self.player.bullet_group.draw(self.screen)
         self.player.bullet_group.update()
-        for curr_enemy in self.enemy_group:
-            curr_enemy.draw(self.screen)
+        self.enemy_group.draw(self.screen)
+        self.enemy_group.update()
