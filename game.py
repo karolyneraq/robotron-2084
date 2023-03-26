@@ -22,7 +22,9 @@ class Game(pygame.sprite.Sprite):
         for i in range(randint(1, 10)):
             enemy = Enemy(randint(0, screen_width), randint(50, screen_height), self.player)
             self.enemy_group.add(enemy)
-        self.score_text_rect = (45, 5)
+        self.score_text_rect = (150, 15)
+        self.wave_number_rect = (415, 615)
+        
 
     # Check if an event happens
     def check_events(self):
@@ -61,7 +63,8 @@ class Game(pygame.sprite.Sprite):
             for player in self.player_sprites:
                 if pygame.sprite.collide_mask(enemy, player):
                     player.kill()
-
+                    self.player.bullet_group.empty()
+                    self.player.bullet_list.clear()
 
     def enemy_damage(self):
         for enemy in self.enemy_group:
@@ -81,6 +84,8 @@ class Game(pygame.sprite.Sprite):
             self.player_damage()
             self.bullet_collision()
             self.enemy_damage()
+            self.check_points()
+
             pygame.display.update()
             clk.tick(fps)
 
@@ -94,4 +99,8 @@ class Game(pygame.sprite.Sprite):
         self.enemy_group.draw(self.screen)
         self.enemy_group.update()
 
-   
+    def check_points(self):
+        score_text = score_font.render(str(self.player.score), True, RED)
+        wave_text = score_font.render(str(self.player.wave_number)+ " WAVE", True, RED)
+        self.screen.blit(score_text, self.score_text_rect)
+        self.screen.blit(wave_text, self.wave_number_rect)

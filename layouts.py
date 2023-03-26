@@ -6,7 +6,7 @@ from config import *
 class Layouts:
     def __init__(self):
         self.group = pygame.sprite.Group()
-        self.wall_color = yellow
+        self.wall_color = YELLOW
         self.borders()
 
     def get_group(self):

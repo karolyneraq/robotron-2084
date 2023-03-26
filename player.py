@@ -8,6 +8,7 @@ class Player(pygame.sprite.Sprite):
         self.ang_y = 0
         self.ang_x = 1
         self.score = 0
+        self.wave_number = 1
         self.shoot_cooldown = shoot_cooldown
         self.bullet_list = []
         self.bullet_group = pygame.sprite.Group()
