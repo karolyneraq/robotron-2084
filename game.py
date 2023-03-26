@@ -5,6 +5,7 @@ from player import Player
 from layouts import Layouts
 from humans import Humans
 
+
 # joysticks = [pygame.joystick.Joystick(x) for x in range(pygame.joystick.get_count())]
 # for joystick in joysticks:
 #    joystick.init()
@@ -70,23 +71,25 @@ class Game(pygame.sprite.Sprite):
             for player in self.player_sprites:
                 if pygame.sprite.collide_mask(enemy, player):
                     player.kill()
+                    pygame.quit()
                     self.player.bullet_group.empty()
                     self.player.bullet_list.clear()
+                    pygame.quit()
 
     def enemy_damage(self):
         for enemy in self.enemy_group:
             for bullet in self.player.bullet_group:
                 if pygame.sprite.collide_mask(enemy, bullet):
                     bullet.kill()
-                    mixer.music.load('sounds/death.mp3')
+                    death.play()
                     enemy.kill()
-                    mixer.music.play()
                     self.player.score += 100
-    
+
     def collect_humans(self):
         for human in self.human_group:
             for player in self.player_sprites:
                 if pygame.sprite.collide_mask(player, human):
+                    get_human.play()
                     human.kill()
                     self.player.score += 2000
 
@@ -95,7 +98,18 @@ class Game(pygame.sprite.Sprite):
             for enemy in self.enemy_group:
                 if pygame.sprite.collide_mask(enemy, human):
                     human.kill()
-        
+                    kill_human.play()
+
+    @staticmethod
+    def draw_squares(screen, screen_width, screen_height, num_squares, square_size):
+        for i in range(num_squares):
+            # Randomly generate the position and color of the square
+            x = rand.randint(0, screen_width - square_size)
+            y = rand.randint(0, screen_height - square_size)
+            color = (rand.randint(0, 255), rand.randint(0, 255), rand.randint(0, 255))
+
+            # Draw the square on the screen
+            pygame.draw.rect(screen, color, (x, y, square_size, square_size))
 
     # sets the game looping
     def game_loop(self):
@@ -113,7 +127,7 @@ class Game(pygame.sprite.Sprite):
             self.check_points()
             self.human_collide()
             self.random_colours()
-
+            self.draw_squares(screen, screen_width, screen_height, num_squares, square_size)
             pygame.display.update()
             clk.tick(fps)
 
