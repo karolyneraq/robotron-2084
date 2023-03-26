@@ -1,4 +1,5 @@
 import wall
+from random import *
 from config import *
 
 
@@ -6,8 +7,12 @@ from config import *
 class Layouts:
     def __init__(self):
         self.group = pygame.sprite.Group()
-        self.wall_color = YELLOW
+        self.wall_color = colour_list[0]
         self.borders()
+
+    def change_wall_colour(self):
+        i = randint(0, 6)
+        self.wall_color = colour_list[i]
 
     def get_group(self):
         return self.group

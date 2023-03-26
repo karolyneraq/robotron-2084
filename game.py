@@ -77,8 +77,23 @@ class Game(pygame.sprite.Sprite):
         for enemy in self.enemy_group:
             for bullet in self.player.bullet_group:
                 if pygame.sprite.collide_mask(enemy, bullet):
+                    bullet.kill()
                     enemy.kill()
                     self.player.score += 100
+    
+    def collect_humans(self):
+        for human in self.human_group:
+            for player in self.player_sprites:
+                if pygame.sprite.collide_mask(player, human):
+                    human.kill()
+                    self.player.score += 2000
+
+    def kill_humans(self):
+        for human in self.human_group:
+            for enemy in self.enemy_group:
+                if pygame.sprite.collide_mask(enemy, human):
+                    human.kill()
+        
 
     # sets the game looping
     def game_loop(self):
@@ -91,8 +106,11 @@ class Game(pygame.sprite.Sprite):
             self.player_damage()
             self.bullet_collision()
             self.enemy_damage()
+            self.collect_humans()
+            self.kill_humans()
             self.check_points()
             self.human_collide()
+            self.random_colours()
 
             pygame.display.update()
             clk.tick(fps)
@@ -100,6 +118,7 @@ class Game(pygame.sprite.Sprite):
     # draw elements
     def draw_sprites(self):
         self.walls.draw(self.screen)
+        self.walls.update()
         self.player.update()
         self.player_sprites.draw(self.screen)
         self.player.bullet_group.draw(self.screen)
@@ -120,3 +139,7 @@ class Game(pygame.sprite.Sprite):
             for human in self.human_group:
                 if pygame.sprite.collide_mask(human, wall):
                     human.human_movement(True)
+
+    def random_colours(self):
+        for wall in self.walls:
+            wall.wall_colour = colour_list[3]

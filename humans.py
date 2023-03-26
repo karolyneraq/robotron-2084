@@ -1,5 +1,4 @@
 import random
-
 from config import *
 
 
@@ -11,9 +10,9 @@ class Humans(pygame.sprite.Sprite):
         self.human_vel = 1
         # self.hit_box = (self.x, self.y, 34, 34)
         self.assets = []
-        self.assets.append(pygame.transform.scale(pygame.image.load('assets/Baby.png'), (32, 42)))
-        self.assets.append(pygame.transform.scale(pygame.image.load('assets/Mother.png'), (32, 42)))
-        self.assets.append(pygame.transform.scale(pygame.image.load('assets/Father.png'), (32, 42)))
+        self.assets.append(pygame.transform.scale(pygame.image.load('Assets/Baby.png'), (32, 42)))
+        self.assets.append(pygame.transform.scale(pygame.image.load('Assets/Mother.png'), (32, 42)))
+        self.assets.append(pygame.transform.scale(pygame.image.load('Assets/Father.png'), (32, 42)))
         self.current_sprite = random.randint(0, 2)
         self.image = self.assets[self.current_sprite]
         self.rect = self.image.get_rect()

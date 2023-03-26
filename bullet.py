@@ -8,7 +8,7 @@ class Bullet(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.ang = ang
         self.speed = bullet_speed
-        self.image = pygame.transform.scale(bullet, (180, 20))
+        self.image = pygame.transform.scale(bullet, (150, 15))
 
         if self.ang[0] == 0:
             self.image = pygame.transform.rotate(self.image, 90)

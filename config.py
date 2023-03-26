@@ -14,6 +14,8 @@ BLUE = (0, 97, 148)
 DARKER_GREEN = (31, 61, 12)
 DARKER_BLUE = (11, 11, 69)
 
+colour_list = [RED, YELLOW, WHITE, GREEN, BLUE, DARKER_BLUE, DARKER_GREEN]
+
 # screen height and width
 screen_width = 1000
 screen_height = 650
