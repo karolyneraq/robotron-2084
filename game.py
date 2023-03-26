@@ -1,6 +1,6 @@
 from random import randint
 from config import *
-from enemy import Enemy
+from enemys import *
 from player import Player
 from layouts import Layouts
 from humans import Humans
@@ -23,8 +23,10 @@ class Game(pygame.sprite.Sprite):
         self.player_sprites.add(self.player)
         self.background = game_surface
         for i in range(randint(1, 10)):
-            enemy = Enemy(randint(0, screen_width), randint(50, screen_height), self.player)
-            self.enemy_group.add(enemy)
+            enemy_red = Red(randint(0, screen_width), randint(50, screen_height), self.player)
+            enemy_green = Green(randint(0, screen_width), randint(50, screen_height), self.player)
+            self.enemy_group.add(enemy_red)
+            self.enemy_group.add(enemy_green)
 
         for h in range(3):
             human = Humans(randint(75, 865), randint(80, screen_height - 80))
@@ -95,7 +97,6 @@ class Game(pygame.sprite.Sprite):
             for enemy in self.enemy_group:
                 if pygame.sprite.collide_mask(enemy, human):
                     human.kill()
-        
 
     # sets the game looping
     def game_loop(self):
