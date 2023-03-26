@@ -1,7 +1,7 @@
 import pygame
+import pygame
 from pygame import mixer
 import random as rand
-
 pygame.font.init()
 pygame.mixer.init()
 
@@ -17,23 +17,22 @@ BLUE = (0, 97, 148)
 DARKER_GREEN = (31, 61, 12)
 DARKER_BLUE = (11, 11, 69)
 
-# Sounds
-death = pygame.mixer.Sound("sounds/death.mp3")
-get_human = pygame.mixer.Sound("sounds/coleta.mp3")
-kill_human = pygame.mixer.Sound("sounds/oin.mp3")
-bullet = pygame.mixer.Sound("sounds/tiro.mp3")
-
-colour_list = [RED, YELLOW, WHITE, GREEN, BLUE, DARKER_BLUE, DARKER_GREEN]
-num_squares = 50
-square_size = 1
+colour_list = [RED, YELLOW, GREEN, BLUE, DARKER_GREEN]
 
 # screen height and width
 screen_width = 1000
 screen_height = 650
 screen = pygame.display.set_mode((screen_width, screen_height))
+
+# Sounds
+death = pygame.mixer.Sound("sounds/death.mp3")
+get_human = pygame.mixer.Sound("sounds/coleta.mp3")
+kill_human = pygame.mixer.Sound("sounds/oin.mp3")
+bullet = pygame.mixer.Sound("sounds/tiro.mp3")
     
 proportion = 100
-
+num_squares = 50
+square_size = 1
 # sets the game surface
 game_surface = pygame.Surface(([1000, 650]))
 

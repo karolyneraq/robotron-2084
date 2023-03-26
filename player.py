@@ -28,12 +28,14 @@ class Player(pygame.sprite.Sprite):
             if not (key[pygame.K_w] or key[pygame.K_s]):
                 self.ang_y = 0
             self.rect.x += -self.speed
+            self.x = self.rect.x
             self.ang_x = -1
 
         if key[pygame.K_d]:
             if not (key[pygame.K_w] or key[pygame.K_s]):
                 self.ang_y = 0
             self.rect.x += self.speed
+            self.x = self.rect.x
             self.ang_x = 1
 
         if key[pygame.K_w]:
@@ -41,12 +43,14 @@ class Player(pygame.sprite.Sprite):
                 self.ang_x = 0
             self.ang_y = -1
             self.rect.y += -self.speed
+            self.y = self.rect.y
 
         if key[pygame.K_s]:
             if not (key[pygame.K_d] or key[pygame.K_a]):
                 self.ang_x = 0
             self.ang_y = 1
             self.rect.y += self.speed
+            self.y = self.rect.y
 
     def shoot(self):
         if self.shoot_cooldown == 0:

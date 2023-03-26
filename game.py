@@ -1,10 +1,9 @@
-from random import randint
+from random import *
 from config import *
 from enemy import Enemy
 from player import Player
 from layouts import Layouts
 from humans import Humans
-
 
 # joysticks = [pygame.joystick.Joystick(x) for x in range(pygame.joystick.get_count())]
 # for joystick in joysticks:
@@ -24,7 +23,7 @@ class Game(pygame.sprite.Sprite):
         self.player_sprites.add(self.player)
         self.background = game_surface
         for i in range(randint(1, 10)):
-            enemy = Enemy(randint(0, screen_width), randint(50, screen_height), self.player)
+            enemy = Enemy(randint(75, 865), randint(80, screen_height - 80), self.player)
             self.enemy_group.add(enemy)
 
         for h in range(3):
@@ -71,26 +70,24 @@ class Game(pygame.sprite.Sprite):
             for player in self.player_sprites:
                 if pygame.sprite.collide_mask(enemy, player):
                     player.kill()
-                    pygame.quit()
                     self.player.bullet_group.empty()
                     self.player.bullet_list.clear()
-                    pygame.quit()
 
     def enemy_damage(self):
         for enemy in self.enemy_group:
             for bullet in self.player.bullet_group:
                 if pygame.sprite.collide_mask(enemy, bullet):
                     bullet.kill()
-                    death.play()
                     enemy.kill()
+                    death.play()
                     self.player.score += 100
-
+    
     def collect_humans(self):
         for human in self.human_group:
             for player in self.player_sprites:
                 if pygame.sprite.collide_mask(player, human):
-                    get_human.play()
                     human.kill()
+                    get_human.play()
                     self.player.score += 2000
 
     def kill_humans(self):
@@ -111,6 +108,13 @@ class Game(pygame.sprite.Sprite):
             # Draw the square on the screen
             pygame.draw.rect(screen, color, (x, y, square_size, square_size))
 
+    def draw_borders(self):
+        colour = choice(colour_list)
+        pygame.draw.rect(self.screen, colour, (45, 45, 910, 10))
+        pygame.draw.rect(self.screen, colour, (45, 600, 910, 10))
+        pygame.draw.rect(self.screen, colour, (45, 45, 10, 555))
+        pygame.draw.rect(self.screen, colour, (950, 45, 10, 565))
+
     # sets the game looping
     def game_loop(self):
         while self.loop:
@@ -126,14 +130,13 @@ class Game(pygame.sprite.Sprite):
             self.kill_humans()
             self.check_points()
             self.human_collide()
-            self.random_colours()
-            self.draw_squares(screen, screen_width, screen_height, num_squares, square_size)
+            self.draw_borders()
+
             pygame.display.update()
             clk.tick(fps)
 
     # draw elements
     def draw_sprites(self):
-        self.walls.draw(self.screen)
         self.walls.update()
         self.player.update()
         self.player_sprites.draw(self.screen)
@@ -145,8 +148,8 @@ class Game(pygame.sprite.Sprite):
         self.human_group.update()
 
     def check_points(self):
-        score_text = score_font.render(str(self.player.score), True, RED)
-        wave_text = score_font.render(str(self.player.wave_number) + " WAVE", True, RED)
+        score_text = score_font.render(str(self.player.score), True, choice(colour_list))
+        wave_text = score_font.render(str(self.player.wave_number) + " WAVE", True, choice(colour_list))
         self.screen.blit(score_text, self.score_text_rect)
         self.screen.blit(wave_text, self.wave_number_rect)
 
@@ -154,8 +157,11 @@ class Game(pygame.sprite.Sprite):
         for wall in self.walls:
             for human in self.human_group:
                 if pygame.sprite.collide_mask(human, wall):
-                    human.human_movement(True)
-
-    def random_colours(self):
-        for wall in self.walls:
-            wall.wall_colour = colour_list[3]
+                    if abs(human.rect.top - wall.rect.bottom) < 50:
+                        human.human_movement(True, False)
+                    elif abs(wall.rect.top - human.rect.bottom) < 50:
+                        human.human_movement(True, False)
+                    elif abs(wall.rect.left - human.rect.right) < 50:
+                        human.human_movement(False, True)
+                    elif abs(human.rect.left - wall.rect.right) < 50:
+                        human.human_movement(False, True)

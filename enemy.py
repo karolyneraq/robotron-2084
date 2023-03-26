@@ -8,7 +8,7 @@ class Enemy(pygame.sprite.Sprite):
         super().__init__()
         self.x = x
         self.y = y
-        self.enemy_vel = 1
+        self.enemy_vel = 2
         self.hit_box = (self.x, self.y, 34, 34)
         self.assets = []
         self.assets.append(pygame.transform.scale(pygame.image.load('sprites/Enemys/Vermelho/static.png'), (32, 42)))
